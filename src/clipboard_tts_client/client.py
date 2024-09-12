@@ -53,9 +53,11 @@ class ClipboardApp(QWidget):
         ret_str = f'Texto processado: {text}'
         return ret_str
 
-if __name__ == '__main__':
+def main():
     app = QApplication(sys.argv)
     ex = ClipboardApp()
     ex.show()
     sys.exit(app.exec_())
 
+if __name__ == '__main__':
+    main();

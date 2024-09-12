@@ -26,7 +26,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'clipboard-tts-client=ClipboardTTSClient.client:main',
+            'clipboard-tts-client=clipboard_tts_client.client:main',
         ],
     },
     classifiers=[
