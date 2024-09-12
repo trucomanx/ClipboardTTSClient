@@ -4,6 +4,15 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QTe
 from PyQt5.QtGui import QClipboard, QPixmap
 from PyQt5.QtCore import Qt
 
+from langdetect import detect
+
+def detectar_linguagem(texto):
+    try:
+        linguagem = detect(texto)
+        return linguagem
+    except Exception as e:
+        return "en"
+
 class ClipboardApp(QWidget):
     def __init__(self):
         super().__init__()
@@ -50,7 +59,8 @@ class ClipboardApp(QWidget):
     def my_func(self, text):
         # Placeholder para a função que você irá implementar
         # Retorna uma string com base no texto passado
-        ret_str = f'Texto processado: {text}'
+        languagem=detectar_linguagem(text);
+        ret_str = f'Languagem: {languagem}\nTexto processado: {text}'
         return ret_str
 
 def main():

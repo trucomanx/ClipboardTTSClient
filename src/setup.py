@@ -22,7 +22,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "PyQt5",
-        'text-to-speech-program'
+        'text-to-speech-program',
+        'langdetect'
     ],
     entry_points={
         'console_scripts': [
