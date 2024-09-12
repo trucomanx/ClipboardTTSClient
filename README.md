@@ -13,10 +13,17 @@ cd src
 python3 setup.py sdist
 pip install dist/clipboard_tts_client-*.tar.gz
 ```
+
 ## Add a program to the Linux service
 Adding to Linux service
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTTSClient/main/install_linux_service.sh | sh
+```
+## Using
+
+
+```bash
+clipboard-tts-client
 ```
 

@@ -3,15 +3,28 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QTextEdit, QLabel
 from PyQt5.QtGui import QClipboard, QPixmap
 from PyQt5.QtCore import Qt
-
+import os
 from langdetect import detect
+import requests
 
 def detectar_linguagem(texto):
     try:
         linguagem = detect(texto)
         return linguagem
     except Exception as e:
-        return "en"
+        return "en";
+
+
+def send_json_from_dict(server_url,data):
+    # Enviar solicitação POST ao servidor
+    response = requests.post(f'{server_url}/add_task', json=data)
+
+    if response.status_code == 200:
+        print(f"Task sent successfully! ID: {response.json()['id']}")
+        return response.json()['id'];
+    else:
+        print("Error submitting task.")
+        return None
 
 class ClipboardApp(QWidget):
     def __init__(self):
@@ -20,14 +33,20 @@ class ClipboardApp(QWidget):
 
     def initUI(self):
         self.setWindowTitle('Clipboard TTS Client')
-        self.setGeometry(100, 100, 400, 300)
+        self.setGeometry(100, 100, 180, 256)
 
         # Layout
         layout = QVBoxLayout()
 
+        # Obter o caminho do diretório onde o script está localizado
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # Construir o caminho para o ícone
+        icon_path = os.path.join(base_dir, 'icons', 'logo.png')
+
         # Logo
         self.logo = QLabel(self)
-        pixmap = QPixmap("icons/logo.png")  # Substitua "logo.png" pelo caminho do seu arquivo de logo
+        pixmap = QPixmap(icon_path)
         self.logo.setPixmap(pixmap)
         self.logo.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.logo)
@@ -59,8 +78,18 @@ class ClipboardApp(QWidget):
     def my_func(self, text):
         # Placeholder para a função que você irá implementar
         # Retorna uma string com base no texto passado
-        languagem=detectar_linguagem(text);
-        ret_str = f'Languagem: {languagem}\nTexto processado: {text}'
+        if text.strip()=="":
+            return "";
+        
+        SERVER_URL = 'http://localhost:5000'
+        DATA={
+            "text": text, 
+            "language": detectar_linguagem(text),
+            "split_pattern": [".", "\n\n"], 
+            "speed":1.25 
+        }
+        ret_str=send_json_from_dict(SERVER_URL,DATA)
+        
         return ret_str
 
 def main():
