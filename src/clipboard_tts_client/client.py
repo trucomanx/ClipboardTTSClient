@@ -10,7 +10,7 @@ class ClipboardApp(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle('Clipboard App')
+        self.setWindowTitle('Clipboard TTS Client')
         self.setGeometry(100, 100, 400, 300)
 
         # Layout
@@ -18,13 +18,13 @@ class ClipboardApp(QWidget):
 
         # Logo
         self.logo = QLabel(self)
-        pixmap = QPixmap("logo.png")  # Substitua "logo.png" pelo caminho do seu arquivo de logo
+        pixmap = QPixmap("icons/logo.png")  # Substitua "logo.png" pelo caminho do seu arquivo de logo
         self.logo.setPixmap(pixmap)
         self.logo.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.logo)
 
         # Botão
-        self.button = QPushButton('Pegar texto da área de transferência', self)
+        self.button = QPushButton('Play clipboard text', self)
         self.button.clicked.connect(self.get_clipboard_text)
         layout.addWidget(self.button)
 
