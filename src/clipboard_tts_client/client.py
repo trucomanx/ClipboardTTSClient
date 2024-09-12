@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QTextEdit, QLabel
 from PyQt5.QtGui import QClipboard, QPixmap
