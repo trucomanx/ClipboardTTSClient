@@ -18,11 +18,17 @@ Execute `which clipboard-tts-client` to see where it was installed, probably in 
 
 ### 1.2. Add clipboard-tts-client to the Linux start session
 
+Adding client GUI program to Linux start session (`~/.config/autostart/clipboard-tts-client.desktop`)
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTTSClient/main/install_linux_session.sh | sh
+curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTTSClient/main/install_linux_program_session.sh | sh
 ```
 
-After the last code, the program client starts with the user session.
+Adding bar indicator to Linux start session (`~/.config/autostart/clipboard-tts-indicator.desktop`)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTTSClient/main/install_linux_indicator_session.sh | sh
+```
 
 ## 2. Using
 

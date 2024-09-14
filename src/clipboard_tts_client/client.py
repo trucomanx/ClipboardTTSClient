@@ -4,27 +4,10 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QTe
 from PyQt5.QtGui import QClipboard, QPixmap
 from PyQt5.QtCore import Qt
 import os
-from langdetect import detect
-import requests
 
-def detectar_linguagem(texto):
-    try:
-        linguagem = detect(texto)
-        return linguagem
-    except Exception as e:
-        return "en";
-
-
-def send_json_from_dict(server_url,data):
-    # Enviar solicitação POST ao servidor
-    response = requests.post(f'{server_url}/add_task', json=data)
-
-    if response.status_code == 200:
-        print(f"Task sent successfully! ID: {response.json()['id']}")
-        return response.json()['id'];
-    else:
-        print("Error submitting task.")
-        return None
+from lib_funcs import detectar_linguagem
+from lib_funcs import send_json_from_dict
+from lib_funcs import tts_play
 
 class ClipboardApp(QWidget):
     def __init__(self):
@@ -78,19 +61,7 @@ class ClipboardApp(QWidget):
     def my_func(self, text):
         # Placeholder para a função que você irá implementar
         # Retorna uma string com base no texto passado
-        if text.strip()=="":
-            return "";
-        
-        SERVER_URL = 'http://localhost:5000'
-        DATA={
-            "text": text, 
-            "language": detectar_linguagem(text),
-            "split_pattern": [".", "\n\n"], 
-            "speed":1.25 
-        }
-        ret_str=send_json_from_dict(SERVER_URL,DATA)
-        
-        return ret_str
+        return tts_play(text);
 
 def main():
     app = QApplication(sys.argv)
