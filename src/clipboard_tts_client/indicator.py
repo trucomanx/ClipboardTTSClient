@@ -8,9 +8,9 @@ from gi.repository import Gtk, AppIndicator3
 from PyQt5.QtWidgets import QApplication
 import os
 
-from lib_funcs import detectar_linguagem
-from lib_funcs import send_json_from_dict
-from lib_funcs import tts_play
+from .lib_funcs import detectar_linguagem
+from .lib_funcs import send_json_from_dict
+from .lib_funcs import tts_play
 
 last_play_id=None;
 

@@ -26,5 +26,5 @@ StartupNotify=true
 "
 
 # Cria o arquivo de serviço temporário e escreve o conteúdo nele
-echo "$SERVICE_CONTENT" | sudo tee $SERVICE_FILE > /dev/null
+echo "$SERVICE_CONTENT" | tee $SERVICE_FILE > /dev/null
 
