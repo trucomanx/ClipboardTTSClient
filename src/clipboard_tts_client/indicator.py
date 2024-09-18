@@ -8,8 +8,7 @@ from gi.repository import Gtk, AppIndicator3
 from PyQt5.QtWidgets import QApplication
 import os
 
-from .lib_funcs import detectar_linguagem
-from .lib_funcs import send_json_from_dict
+from .lib_funcs import tts_remove_task
 from .lib_funcs import tts_play
 
 last_play_id=None;
@@ -18,6 +17,7 @@ def quit(source):
     Gtk.main_quit();
 
 def play(source):
+    global last_play_id
     # Verifica se QApplication já existe
     app = QApplication.instance()
     if app is None:
@@ -29,6 +29,11 @@ def play(source):
     # Suponho que tts_play seja outra função que você implementou
     last_play_id = tts_play(text)
 
+def remove(source):
+    global last_play_id
+    msg=tts_remove_task(last_play_id);
+    #print(msg);
+    
 def main():
     # Criação do indicador
     indicator = AppIndicator3.Indicator.new(
@@ -40,10 +45,15 @@ def main():
     # Criação do menu
     menu = Gtk.Menu()
 
-    # Adicionando exit
+    # Adicionando play
     item_play = Gtk.MenuItem(label="Play clipboard")
     item_play.connect("activate", play)
     menu.append(item_play)
+
+    # Adicionando play
+    item_remove = Gtk.MenuItem(label="Remove last task")
+    item_remove.connect("activate", remove)
+    menu.append(item_remove)
 
     # Adicionando exit
     item_quit = Gtk.MenuItem(label="Exit")
